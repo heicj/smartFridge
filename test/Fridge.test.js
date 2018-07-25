@@ -10,13 +10,23 @@ describe('smart fridge class tests', () => {
     it('adds item to fridge', () => {
         const fridge = new Fridge();
         fridge.handleItemAdded('dairy', 1234, 'milk', 1);
-        assert.deepEqual(fridge.inventory, { 1234: { 'itemType': 'dairy', 'name': 'milk', 'fillFactor': 1 } });
+        assert.deepEqual(fridge.inventory, { 1234: { 'itemType': 'dairy', 'name': 'milk', 'fillFactor': 1, 'in': true } });
     });
 
     it('it adds to item total if item is already in fridge', () => {
         const fridge = new Fridge();
         fridge.handleItemAdded('dairy', 1234, 'milk', 1);
         fridge.handleItemAdded('dairy', 1234, 'milk', 1);
-        assert.deepEqual(fridge.inventory, { 1234: { 'itemType': 'dairy', 'name': 'milk', 'fillFactor': 2 } });
+        assert.deepEqual(fridge.inventory, { 1234: { 'itemType': 'dairy', 'name': 'milk', 'fillFactor': 2, 'in': true } });
+    });
+
+    it('event handler removes item in property to false. subtracts fillFactor', () => {
+        const fridge = new Fridge();
+        fridge.handleItemAdded('dairy', 1234, 'milk', 1);
+        fridge.handleItemRemoved(1234);
+        assert.deepEqual(fridge.inventory, { 1234: { 'itemType': 'dairy', 'name': 'milk', 'fillFactor': 0, 'in': false } });
+
+        fridge.handleItemAdded('dairy', 1234, 'milk', .5);
+        assert.deepEqual(fridge.inventory, { 1234: { 'itemType': 'dairy', 'name': 'milk', 'fillFactor': .5, 'in': true } });
     });
 });
