@@ -1,0 +1,22 @@
+{
+  "name": "smartfridge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heicj/smartFridge.git"
+  },
+  "author": "Charlie Heiner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/heicj/smartFridge/issues"
+  },
+  "homepage": "https://github.com/heicj/smartFridge#readme",
+  "dependencies": {
+    "mocha": "^5.2.0"
+  }
+}
