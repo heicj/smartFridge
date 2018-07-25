@@ -41,6 +41,13 @@ describe('smart fridge class tests', () => {
         assert.deepEqual(list, [['fruit', .3], ['juice', .4]]);
     });
 
+    it('getFillFactor returns avg fill factor of item type. Ignores empty containers in avg', () => {
+        fridge.handleItemAdded('dairy', 5678, 'chocolate milk', .5);
+        fridge.handleItemAdded('dairy', 5678, 'almond milk', .0);
+        const avg = fridge.getFillFactor('dairy');
+        assert.equal(avg, .75);
+    });
+
     it('forgetItem method keeps item from being added to getItems query list', () => {
         fridge.forgetItem('dairy');
         const list = fridge.getItems(1);

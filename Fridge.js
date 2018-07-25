@@ -29,6 +29,19 @@ class SmartFridgeManager {
         return list;
     }
 
+    getFillFactor(itemType){
+        let totalFill = 0;
+        let typeCount = 0;
+        Object.keys(this.inventory).map(key => {
+            let item = this.inventory[key];
+            if(item.itemType == itemType && item.fillFactor > 0){
+                totalFill = totalFill + item.fillFactor;
+                typeCount += 1;
+            }
+        });
+        return totalFill / typeCount;
+    }
+
     forgetItem(itemType){
         Object.keys(this.inventory).map(key => {
             let item = this.inventory[key];
