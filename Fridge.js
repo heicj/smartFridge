@@ -17,6 +17,17 @@ class SmartFridgeManager {
         item.in = false;
         item.fillFactor -= item.fillFactor; 
     }
+
+    getItems(fillFactor){
+        let list = [];
+        Object.keys(this.inventory).map(key => {
+            let item = this.inventory[key];
+            if(item.fillFactor <= fillFactor){
+                list.push([item.itemType, item.fillFactor]);
+            } 
+        });
+        return list;
+    }
 }
 
 module.exports = SmartFridgeManager;

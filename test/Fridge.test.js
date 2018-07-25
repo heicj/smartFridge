@@ -29,4 +29,13 @@ describe('smart fridge class tests', () => {
         fridge.handleItemAdded('dairy', 1234, 'milk', .5);
         assert.deepEqual(fridge.inventory, { 1234: { 'itemType': 'dairy', 'name': 'milk', 'fillFactor': .5, 'in': true } });
     });
+
+    it('getItems query returns item of fillFactor less than equal to requested', () => {
+        const fridge = new Fridge();
+        fridge.handleItemAdded('dairy', 1234, 'milk', 1);
+        fridge.handleItemAdded('juice', 5678, 'orange juice', .4);
+        fridge.handleItemAdded('fruit', 2468, 'apples', .3);
+        const list = fridge.getItems(.5);
+        assert.deepEqual(list, [['fruit', .3], ['juice', .4]]);
+    });
 });
