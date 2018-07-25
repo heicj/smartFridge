@@ -22,11 +22,20 @@ class SmartFridgeManager {
         let list = [];
         Object.keys(this.inventory).map(key => {
             let item = this.inventory[key];
-            if(item.fillFactor <= fillFactor){
+            if(item.fillFactor <= fillFactor && !item.forget){
                 list.push([item.itemType, item.fillFactor]);
             } 
         });
         return list;
+    }
+
+    forgetItem(itemType){
+        Object.keys(this.inventory).map(key => {
+            let item = this.inventory[key];
+            if(item.itemType === itemType){
+                item['forget'] = true;
+            }
+        });
     }
 }
 

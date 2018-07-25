@@ -11,7 +11,7 @@ describe('smart fridge default test', () => {
 
 describe('smart fridge class tests', () => {
     let fridge = null;
-    
+
     beforeEach(function(){
         fridge = new Fridge();
         fridge.handleItemAdded('dairy', 1234, 'milk', 1);
@@ -39,5 +39,11 @@ describe('smart fridge class tests', () => {
         fridge.handleItemAdded('fruit', 2468, 'apples', .3);
         const list = fridge.getItems(.5);
         assert.deepEqual(list, [['fruit', .3], ['juice', .4]]);
+    });
+
+    it('forgetItem method keeps item from being added to getItems query list', () => {
+        fridge.forgetItem('dairy');
+        const list = fridge.getItems(1);
+        assert.deepEqual(list, []);
     });
 });
